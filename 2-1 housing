@@ -1,0 +1,15 @@
+from pathlib import Path
+import pandas as pd
+import tarfile
+import urllib.request
+
+def loading_data():
+  path = Path("datasets/housing.tgz")
+  if not path.is_file():
+    Path("datasets").mkdir(parents=True, exist_ok=True)
+    url = "https://github.com/ageron/data/raw/main/housing.tgz")
+    urllib.request.urlretrieve(url, path)
+    with tarfile.open(path) as housing_tarball:
+      housing_tarball.extractall(path="datasets", filter"data")
+    return pd.read_csv(Path("dataasets/housing/housing.csv"))
+housing_full = loading_data()
